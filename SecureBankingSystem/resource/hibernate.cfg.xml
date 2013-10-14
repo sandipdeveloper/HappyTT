@@ -54,6 +54,7 @@
 <property name="current_session_context_class">thread</property>
         <!-- Names the annotated entity class -->
         <mapping class="com.asu.ss.secure_banking_system.model.AccountEntity"/>
+        <mapping class="com.asu.ss.secure_banking_system.model.TransactionEntity"/>
 
     </session-factory>
 

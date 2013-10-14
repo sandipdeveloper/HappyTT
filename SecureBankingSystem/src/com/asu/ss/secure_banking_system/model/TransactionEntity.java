@@ -1,5 +1,6 @@
 package com.asu.ss.secure_banking_system.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -9,7 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Embeddable
-class TransactionKey {
+class TransactionKey implements Serializable{
 
 	@Column(name = "tran_id")
 	private long transactionID;

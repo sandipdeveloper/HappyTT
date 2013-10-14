@@ -3,6 +3,7 @@ package com.asu.ss.secure_banking_system.servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -17,6 +18,9 @@ import org.hibernate.Transaction;
 
 import com.asu.ss.secure_banking_system.model.AccountEntity;
 import com.asu.ss.secure_banking_system.model.SessionFactoryUtil;
+import com.asu.ss.secure_banking_system.model.TranConfResult;
+import com.asu.ss.secure_banking_system.model.TransferService;
+import com.asu.ss.secure_banking_system.model.TypeOfTransfer;;
 
 /**
  * Servlet implementation class DebitAndCreditServlet
@@ -62,21 +66,36 @@ public class DebitAndCreditServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		System.out.print("success");
 		
+		TypeOfTransfer transferInd = null;
+		RequestDispatcher rd = request.getRequestDispatcher("webpages/resultPage.jsp");
 		String account = request.getParameter("accountNo");
 		System.out.println("account number = "+account);
 		
 		double amount = Double.valueOf(request.getParameter("amount"));
 		System.out.println("amount = "+amount);
 		
+		String pageInd = request.getParameter("pageInd");
+		System.out.println("Page = "+pageInd);
 		
+		if(pageInd.equalsIgnoreCase("credit"))
+			transferInd = TypeOfTransfer.CREDIT;
+		else if(pageInd.equalsIgnoreCase("debit"))
+			transferInd = TypeOfTransfer.DEBIT;
+			
 		Session session = SessionFactoryUtil.getSessionFactory().openSession();
 		Transaction tx = null;
-		AccountEntity accEnt;
+		//AccountEntity accEnt;
+		TranConfResult tranConfResult;
+		TransferService transferService = new TransferService(account,transferInd, amount, "SATYA1");
+		transferService.DebitOrCreditAccount();
+		tranConfResult = transferService.getTranConfResult();
+		request.setAttribute("tranConfResult", tranConfResult);
+		rd.forward(request, response);
 		
-		try {
-			tx = session.beginTransaction();
+		
+		/*try {*/
+			/*tx = session.beginTransaction();
 			accEnt = new AccountEntity();
 			
 			accEnt.setAccountID("account2");
@@ -86,9 +105,9 @@ public class DebitAndCreditServlet extends HttpServlet {
 			System.out.println("check here");
 			session.save(accEnt);
 			
-			tx.commit();
+			tx.commit();*/
 			
-		}
+		/*}
 		catch(Exception e)
 		{
 			tx.rollback();
@@ -97,7 +116,7 @@ public class DebitAndCreditServlet extends HttpServlet {
 		finally
 		{
 			session.close();
-		}
+		}*/
 		
 		
 		

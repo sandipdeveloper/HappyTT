@@ -12,9 +12,7 @@ import org.hibernate.Transaction;
 
 
 
-enum TypeOfTransfer {
-	CREDIT,DEBIT,TRANSFER
-}
+
 public class TransferService {
 
 	private String fromAccount;
@@ -23,6 +21,14 @@ public class TransferService {
 	private TypeOfTransfer typeOfTrans;
 	private double tranAmt;
 	private String userID;
+	private TranConfResult tranConfResult;
+	
+	public TranConfResult getTranConfResult() {
+		return tranConfResult;
+	}
+	public void setTranConfResult(TranConfResult tranConfResult) {
+		this.tranConfResult = tranConfResult;
+	}
 	/**
 	 * @return the fromAccount
 	 */
@@ -120,6 +126,7 @@ public class TransferService {
 		AccountEntity accEntity;
 		TransactionKey transactionKey = new TransactionKey();
 		TransactionEntity transaction = new TransactionEntity();
+		TranConfResult tranConfResult = new TranConfResult();
 		
 		Transaction tx = null;
 		Session session = SessionFactoryUtil.getSessionFactory().openSession();
@@ -142,12 +149,27 @@ public class TransferService {
 			transaction.setTransactionKey(transactionKey);
 			transaction.setUserID(accountService.getAccountDetails(account).getUserID());
 			transaction.setTranCreatedByUser(userID);
+			accEntity = accountService.updateBalance(account,tranAmt, typeOfTransfer);
+			transaction.setBalance(accEntity.getAcctBalance());
 			
 			session.save(transaction);
 			
-			accEntity = accountService.updateBalance(account,tranAmt, typeOfTransfer);
+			
 			
 			session.update(accEntity);
+			tranConfResult.setTransactionId(1);
+			tranConfResult.setBalance(accEntity.getAcctBalance());
+			tranConfResult.setAmount(tranAmt);
+			if(typeOfTransfer == 'C') {
+				tranConfResult.setFromAccountId("Not Applicable");
+				tranConfResult.setToAccountId(account);
+			}
+			if(typeOfTransfer == 'D') {
+				tranConfResult.setFromAccountId(account);
+				tranConfResult.setToAccountId("Not Applicable");
+			}
+		
+			this.setTranConfResult(tranConfResult);
 			
 			tx.commit();
 		}

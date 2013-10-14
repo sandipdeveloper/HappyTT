@@ -29,6 +29,7 @@
          <div class="span8">
           <div class="container">
     <form action="DebitAndCreditServlet" method="POST">
+    <input type="hidden" name="pageInd" value="Credit"/>
 		<table>
 			<tr>
 				<td>Account Number</td>
@@ -43,7 +44,7 @@
 		
 			<tr>
 				<td></td>
-				<td><button class="btn btn-success" type="submit" name="credit">Credit</button></td>
+				<td><button class="btn btn-success" type="submit" name="credit">Submit</button></td>
 				<td></td>
 			</tr>
 		</table>
