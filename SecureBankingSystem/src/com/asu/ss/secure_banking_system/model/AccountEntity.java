@@ -1,5 +1,5 @@
 package com.asu.ss.secure_banking_system.model;
-
+//just for test
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
