@@ -5,7 +5,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
 <title>Delete User Account</title>
 <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="bootstrap.css">
+<!--Online link to include bootstrap need not include any libraries in eclipse -->
+<link href="//netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body>
 <div class="container">
