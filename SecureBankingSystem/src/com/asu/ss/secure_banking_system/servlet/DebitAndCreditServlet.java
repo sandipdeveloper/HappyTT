@@ -65,7 +65,7 @@ public class DebitAndCreditServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		request.removeAttribute("exception");
 		
 		TypeOfTransfer transferInd = null;
 		RequestDispatcher rd = request.getRequestDispatcher("webpages/resultPage.jsp");
@@ -82,9 +82,8 @@ public class DebitAndCreditServlet extends HttpServlet {
 			transferInd = TypeOfTransfer.CREDIT;
 		else if(pageInd.equalsIgnoreCase("debit"))
 			transferInd = TypeOfTransfer.DEBIT;
-			
-		Session session = SessionFactoryUtil.getSessionFactory().openSession();
-		Transaction tx = null;
+		try {	
+		
 		//AccountEntity accEnt;
 		TranConfResult tranConfResult;
 		TransferService transferService = new TransferService(account,transferInd, amount, "SATYA1");
@@ -92,7 +91,16 @@ public class DebitAndCreditServlet extends HttpServlet {
 		tranConfResult = transferService.getTranConfResult();
 		request.setAttribute("tranConfResult", tranConfResult);
 		rd.forward(request, response);
-		
+		}
+		catch(Exception e)
+		{
+			request.setAttribute("exception", e.getMessage());
+			System.out.println("exception occered satya : "+e.getMessage());
+			if(transferInd == TypeOfTransfer.CREDIT)
+				request.getRequestDispatcher("webpages/credit.jsp").forward(request, response);
+			else if(transferInd == TypeOfTransfer.DEBIT)
+				request.getRequestDispatcher("webpages/Debit.jsp").forward(request, response);
+		}
 		
 		/*try {*/
 			/*tx = session.beginTransaction();

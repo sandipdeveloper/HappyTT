@@ -11,7 +11,7 @@
 <body>
 <%TranConfResult tranConfResult = (TranConfResult)request.getAttribute("tranConfResult"); %>
 <div class="container">
-	<h1><a href="#">Transaction Confimration</a></h1>
+	<h1>Transaction Confirmation</h1>
 	<div class="navbar">
   		<div class="navbar-inner">
       	<ul class="nav nav-tabs">
@@ -48,14 +48,16 @@
 			<td></td>
 		</tr>
 		
-		<tr>
+		<!-- <tr>
 			<td></td>
-			<td><button class="btn btn-success" type="button" type="submit" name="debit">Debit</button></td>
+			<td><button class="btn btn-success" type="button" type="submit" name="OK">OK</button></td>
 			<td></td>
-		</tr>
+		</tr> -->
 	</table>
 	</form>
 	</div>
 	</div>
 	</div>
 	</div>
+	</body>
+	</html>

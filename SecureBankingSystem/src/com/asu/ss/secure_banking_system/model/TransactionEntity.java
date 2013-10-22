@@ -7,12 +7,17 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 @Embeddable
 class TransactionKey implements Serializable{
 
 	@Column(name = "tran_id")
+	@TableGenerator(name = "Tran_Gen" , table = "ID_GEN" , initialValue = 3)
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "Tran_Gen")
 	private long transactionID;
 	
 	@Column(name = "tran_type")

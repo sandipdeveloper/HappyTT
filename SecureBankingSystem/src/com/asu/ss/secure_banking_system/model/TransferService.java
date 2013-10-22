@@ -120,7 +120,7 @@ public class TransferService {
 		this.tranAmt = tranAmt;
 		this.userID = userID;
 	}
-	public void DebitOrCreditAccount(){
+	public void DebitOrCreditAccount() throws Exception{
 		AccountService accountService = new AccountService();
 		
 		AccountEntity accEntity;
@@ -139,7 +139,7 @@ public class TransferService {
 		try {
 		
 			tx = session.beginTransaction();
-			transactionKey.setTransactionID(1);
+			transactionKey.setTransactionID(2);
 			
 			transactionKey.setTranType(typeOfTransfer);
 		
@@ -176,7 +176,7 @@ public class TransferService {
 		catch(Exception e)
 		{
 			if(tx!=null)	tx.rollback();
-			e.printStackTrace();
+			throw e;
 		}
 		finally {
 			session.close();
@@ -184,7 +184,7 @@ public class TransferService {
 		
 		
 	}
-	public void fundTransferBetweenAccounts() {
+	public void fundTransferBetweenAccounts() throws Exception{
 		
 		AccountService fromAccSer = new AccountService();
 		AccountService toAccSer = new AccountService();
@@ -203,7 +203,7 @@ public class TransferService {
 		
 			tx = session.beginTransaction();
 		
-			frmTransactionKey.setTransactionID(1);
+			//frmTransactionKey.setTransactionID(2);
 			frmTransactionKey.setTranType('C');
 			frmTransaction.setAccountId(fromAccount);
 			frmTransaction.setTranAmount(tranAmt);
@@ -214,7 +214,7 @@ public class TransferService {
 			frmAccEnt = fromAccSer.updateBalance(fromAccount,tranAmt, 'C');
 			frmTransaction.setBalance(frmAccEnt.getAcctBalance());
 			
-			toTransactionKey.setTransactionID(1);
+			//toTransactionKey.setTransactionID(1);
 			toTransactionKey.setTranType('D');
 			toTransaction.setAccountId(toAccount);
 			toTransaction.setTranAmount(tranAmt);
@@ -236,7 +236,7 @@ public class TransferService {
 			catch(Exception e)
 			{
 				if(tx!=null)	tx.rollback();
-				e.printStackTrace();
+				throw e;
 			}
 			finally {
 				session.close();

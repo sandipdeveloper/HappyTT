@@ -43,18 +43,23 @@ public class AccountService {
 	}
 
 
-	public AccountEntity getAccountDetails(String accountID)
+	public AccountEntity getAccountDetails(String accountID) throws Exception
 	{
 		Session session = SessionFactoryUtil.getSessionFactory().openSession();
 		try
 		{
 			session.beginTransaction();
+			System.out.println("account = "+accountID);
 			this.accEntity = (AccountEntity)session.get(AccountEntity.class, accountID);
+			if(accEntity == null)
+				throw new Exception("Invalid Account passed ["+accountID+"]");
 
 		}
-		catch(HibernateException  e)
+		catch(Exception e)
 		{
+			System.out.println("error satya in Account Service : "+e.getMessage());
 			e.printStackTrace();
+			throw e;
 		}
 		finally {
 			session.close();
@@ -63,18 +68,22 @@ public class AccountService {
 		return this.accEntity;
 	}
 	/* updates the balance  */
-	public AccountEntity updateBalance(String accountID,double tranAmount,char typeOfUpdate)
+	public AccountEntity updateBalance(String accountID,double tranAmount,char typeOfUpdate) throws Exception
 	{
 		Session session = SessionFactoryUtil.getSessionFactory().openSession();
 		try
 		{
 			session.beginTransaction();
 			this.accEntity = (AccountEntity)session.get(AccountEntity.class, accountID);
+			if(accEntity == null)
+				throw new Exception("Invalid Account passed ["+accountID+"]");
 
 		}
-		catch(HibernateException  e)
+		catch(Exception  e)
 		{
+			System.out.println("error satya in Account Service1 : "+e.getMessage());
 			e.printStackTrace();
+			throw e;
 		}
 		finally {
 			session.close();
@@ -90,7 +99,7 @@ public class AccountService {
 			availableBalance = accEntity.getAcctBalance() - tranAmount;
 			if(availableBalance < 0.00)
 			{
-				/*throw error here. */
+				throw new Exception("Balance is Insufficient");
 			}
 
 		}
