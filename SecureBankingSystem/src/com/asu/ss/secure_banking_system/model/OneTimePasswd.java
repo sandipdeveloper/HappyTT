@@ -102,11 +102,14 @@ public class OneTimePasswd {
 	{
 		Transaction tx = null;
 		Session session = SessionFactoryUtil.getSessionFactory().openSession();
+		OTPKey otpKey = new OTPKey(userId, otpCode);
+		OneTimePasswordEntity oneTimePasswdEnt;
+		
 		//Session session = SessionFactoryUtil.getSessionFactory().getCurrentSession();
 		try
 		{
 			tx = session.beginTransaction();
-			String sqlStmnt = "SELECT otpGeneratedDate from OneTimePasswordEntity  where user_id = :userId and otp_code = :otpCode";
+			/*String sqlStmnt = "SELECT otpGeneratedDate from OneTimePasswordEntity  where user_id = :userId and otp_code = :otpCode";
 			Query qry = session.createQuery(sqlStmnt);
 		//qry.addEntity(OneTimePasswordEntity.class);
 			qry.setParameter("userId", userId);
@@ -114,14 +117,21 @@ public class OneTimePasswd {
 			List<Date> results = qry.list();
 			System.out.println("no. pf rows returned are :"+results.size());
 			Date currDate = new Date();
-			Date fetchedDate = (Date)results.get(0);
+			Date fetchedDate = (Date)results.get(0);*/
+			
+			oneTimePasswdEnt = (OneTimePasswordEntity)session.get(OneTimePasswordEntity.class, otpKey);
+			if(oneTimePasswdEnt == null)
+				throw new Exception("OTP expired or invalid!!!");
 		
+			Date currDate = new Date();
+			Date fetchedDate = oneTimePasswdEnt.getOtpGeneratedDate();
+			
 			long dateDiff = 0;
 			System.out.println("current Date = ["+currDate+"]");
 			System.out.println("fetched Date = ["+fetchedDate+"]");
 			dateDiff = currDate.getTime() - fetchedDate.getTime();
 			System.out.println("Time lag = "+dateDiff);
-			if(dateDiff > 200000)
+			if(dateDiff > 300000)
 			{
 				System.out.println("OTP expired");
 				throw new Exception("OTP expired or invalid!!!");

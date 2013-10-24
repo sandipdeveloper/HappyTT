@@ -11,12 +11,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
 //import org.apache.catalina.Session;
 import org.hibernate.Transaction;
 
 import com.asu.ss.secure_banking_system.model.AccountEntity;
+import com.asu.ss.secure_banking_system.model.OneTimePasswd;
 import com.asu.ss.secure_banking_system.model.SessionFactoryUtil;
 import com.asu.ss.secure_banking_system.model.TranConfResult;
 import com.asu.ss.secure_banking_system.model.TransferService;
@@ -66,14 +68,24 @@ public class DebitAndCreditServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.removeAttribute("exception");
+		HttpSession session = request.getSession(true);
+		session.removeAttribute("exception1");
 		
 		TypeOfTransfer transferInd = null;
-		RequestDispatcher rd = request.getRequestDispatcher("webpages/resultPage.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("webpages/FinancialOTP.jsp");
+		try {
 		String account = request.getParameter("accountNo");
+		if(account.isEmpty())
+			throw new Exception("Enter the Account No!");
+		
 		System.out.println("account number = "+account);
 		
-		double amount = Double.valueOf(request.getParameter("amount"));
-		System.out.println("amount = "+amount);
+		String amount = request.getParameter("amount");
+		if(amount.isEmpty())
+			throw new Exception("Enter the amount!");
+		
+		double dAmount = Double.valueOf(request.getParameter("amount"));
+		System.out.println("amount = "+dAmount);
 		
 		String pageInd = request.getParameter("pageInd");
 		System.out.println("Page = "+pageInd);
@@ -82,19 +94,25 @@ public class DebitAndCreditServlet extends HttpServlet {
 			transferInd = TypeOfTransfer.CREDIT;
 		else if(pageInd.equalsIgnoreCase("debit"))
 			transferInd = TypeOfTransfer.DEBIT;
-		try {	
-		
+	
 		//AccountEntity accEnt;
-		TranConfResult tranConfResult;
-		TransferService transferService = new TransferService(account,transferInd, amount, "SATYA1");
-		transferService.DebitOrCreditAccount();
+		/*TranConfResult tranConfResult;*/
+		TransferService transferService = new TransferService(account,transferInd, dAmount, "SATYA1");
+		
+		session.setAttribute("transferService", transferService);
+		session.setAttribute("pageInd", pageInd);
+		OneTimePasswd otp = new OneTimePasswd("SATYA1");
+		otp.insertOTPCodeForUser();
+		
+		/*transferService.DebitOrCreditAccount();
 		tranConfResult = transferService.getTranConfResult();
-		request.setAttribute("tranConfResult", tranConfResult);
+		request.setAttribute("tranConfResult", tranConfResult);*/
 		rd.forward(request, response);
 		}
 		catch(Exception e)
 		{
 			request.setAttribute("exception", e.getMessage());
+			session.setAttribute("exception1", e.getMessage());
 			System.out.println("exception occered satya : "+e.getMessage());
 			if(transferInd == TypeOfTransfer.CREDIT)
 				request.getRequestDispatcher("webpages/credit.jsp").forward(request, response);

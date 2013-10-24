@@ -1,5 +1,6 @@
 package com.asu.ss.secure_banking_system.model;
 
+import org.apache.catalina.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
@@ -53,7 +54,6 @@ public class AccountService {
 			this.accEntity = (AccountEntity)session.get(AccountEntity.class, accountID);
 			if(accEntity == null)
 				throw new Exception("Invalid Account passed ["+accountID+"]");
-
 		}
 		catch(Exception e)
 		{

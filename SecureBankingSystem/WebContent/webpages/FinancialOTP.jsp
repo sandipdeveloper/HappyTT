@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
-<title>Delete User Account</title>
+<title>OTP page</title>
 <!-- Bootstrap core CSS -->
 <!--Online link to include bootstrap need not include any libraries in eclipse -->
 <link href="//netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
@@ -11,13 +11,13 @@
 </head>
 <body>
 <div class="container">
-	<h1><a href="#">Debit</a></h1>
+	<h1><a href="#">OTP</a></h1>
 	<div class="navbar">
   		<div class="navbar-inner">
       	<ul class="nav nav-tabs">
       	<li><a href="webpages/credit.jsp">Credit</a></li>
-      	<li class="active"><a href="webpages/Debit.jsp">Debit</a></li>
-      	<li><a href="#">Transfer</a></li>
+      	<li><a href="webpages/Debit.jsp">Debit</a></li>
+      	<li><a href="webpages/Transfer.jsp">Transfer</a></li>
     	</ul>
   		</div>
   	</div>
@@ -31,25 +31,29 @@
          <div class="span8">
           <div class="container">
           <div style="color:red">${exception}</div>
-          <div style="color:blue"><%=(String)session.getAttribute("exception1") %></div>
-          <form action="DebitAndCreditServlet" method="POST">
-    	  <input type="hidden" name="pageInd" value="Debit"/>
+          <div style="color:blue"><%=(String)session.getAttribute("exception1")%></div>
+          <form action="OTPServlet" method="POST">
+    	  <input type="hidden" name="pageInd" value="OTP"/>
 	<table>
-		
 		<tr>
-			<td>Account Number</td>
-			<td><input type = "text" name = "accountNo"></td>
+			<td>Your One Time Password would be expired in 3 minutes.</td>
+			<td></td>
 			<td></td>
 		</tr>
 		<tr>
-			<td>Amount</td>
-			<td><input type="text" name = "amount" ></td>
+			<td>One Time Password is sent to your registered email ID</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Enter OTP</td>
+			<td><input type="text" name = "otpCode" ></td>
 			<td></td>
 		</tr>
 		
 		<tr>
 			<td></td>
-			<td><button class="btn btn-success" type="submit" name="debit">OK</button></td>
+			<td><button class="btn btn-success" type="submit" name="otp">OK</button></td>
 			<td></td>
 		</tr>
 	</table>

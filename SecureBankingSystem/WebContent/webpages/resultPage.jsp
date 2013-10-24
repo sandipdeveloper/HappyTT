@@ -11,7 +11,7 @@
 
 </head>
 <body>
-<%TranConfResult tranConfResult = (TranConfResult)request.getAttribute("tranConfResult"); %>
+<%TranConfResult tranConfResult = (TranConfResult)session.getAttribute("tranConfResult"); %>
 <div class="container">
 	<h1>Transaction Confirmation</h1>
 	<div class="navbar">

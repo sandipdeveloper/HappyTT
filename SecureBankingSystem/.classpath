@@ -44,6 +44,8 @@
 	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/stax2-api-3.1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/staxmapper-1.1.0.Final.jar"/>
 	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/woodstox-core-asl-4.1.1.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mysql-connector-java-5.1.26-bin.jar"/>
+	<classpathentry exported="true" kind="lib" path="WebContent/WEB-INF/lib/mysql-connector-java-5.1.26-bin.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Java_Libraries/unboundid-ldapsdk-2.3.4-se/unboundid-ldapsdk-2.3.4-se/unboundid-ldapsdk-se.jar"/>
+	<classpathentry kind="lib" path="C:/Java_Libraries/javax.mail.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
