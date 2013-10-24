@@ -15,8 +15,8 @@
 	<div class="navbar">
   		<div class="navbar-inner">
       	<ul class="nav nav-tabs">
-      	<li class="active"><a href="Credit">Credit</a></li>
-      	<li><a href="Debit.jsp">Debit</a></li>
+      	<li class="active"><a href="webpages/credit.jsp">Credit</a></li>
+      	<li><a href="SecureBankingSystem/webpages/Debit.jsp">Debit</a></li>
       	<li><a href="#">Transfer</a></li>
     	</ul>
   		</div>
@@ -30,6 +30,7 @@
          </div>
          <div class="span8">
           <div class="container">
+          <div style="color:red">${exception}</div>
     <form action="DebitAndCreditServlet" method="POST">
     <input type="hidden" name="pageInd" value="Credit"/>
 		<table>
@@ -46,7 +47,7 @@
 		
 			<tr>
 				<td></td>
-				<td><button class="btn btn-success" type="submit" name="credit">Submit</button></td>
+				<td><button class="btn btn-success" type="submit" name="credit">OK</button></td>
 				<td></td>
 			</tr>
 		</table>
@@ -55,3 +56,5 @@
 	</div>
 	</div>
 	</div>
+	</body>
+	</html>

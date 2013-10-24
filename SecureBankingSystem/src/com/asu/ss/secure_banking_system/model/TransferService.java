@@ -120,7 +120,7 @@ public class TransferService {
 		this.tranAmt = tranAmt;
 		this.userID = userID;
 	}
-	public void DebitOrCreditAccount(){
+	public void DebitOrCreditAccount() throws Exception{
 		AccountService accountService = new AccountService();
 		
 		AccountEntity accEntity;
@@ -139,7 +139,7 @@ public class TransferService {
 		try {
 		
 			tx = session.beginTransaction();
-			transactionKey.setTransactionID(1);
+			//transactionKey.setTransactionID(2);
 			
 			transactionKey.setTranType(typeOfTransfer);
 		
@@ -157,7 +157,7 @@ public class TransferService {
 			
 			
 			session.update(accEntity);
-			tranConfResult.setTransactionId(1);
+			//tranConfResult.setTransactionId(1);
 			tranConfResult.setBalance(accEntity.getAcctBalance());
 			tranConfResult.setAmount(tranAmt);
 			if(typeOfTransfer == 'C') {
@@ -176,7 +176,7 @@ public class TransferService {
 		catch(Exception e)
 		{
 			if(tx!=null)	tx.rollback();
-			e.printStackTrace();
+			throw e;
 		}
 		finally {
 			session.close();
@@ -184,7 +184,7 @@ public class TransferService {
 		
 		
 	}
-	public void fundTransferBetweenAccounts() {
+	public void fundTransferBetweenAccounts() throws Exception{
 		
 		AccountService fromAccSer = new AccountService();
 		AccountService toAccSer = new AccountService();
@@ -195,7 +195,7 @@ public class TransferService {
 		
 		TransactionEntity toTransaction = new TransactionEntity();
 		TransactionKey toTransactionKey = new TransactionKey();
-		
+		TranConfResult tranConfResult = new TranConfResult();
 		Transaction tx = null;
 		Session session = SessionFactoryUtil.getSessionFactory().openSession();
 		
@@ -203,7 +203,7 @@ public class TransferService {
 		
 			tx = session.beginTransaction();
 		
-			frmTransactionKey.setTransactionID(1);
+			//frmTransactionKey.setTransactionID(2);
 			frmTransactionKey.setTranType('C');
 			frmTransaction.setAccountId(fromAccount);
 			frmTransaction.setTranAmount(tranAmt);
@@ -214,12 +214,12 @@ public class TransferService {
 			frmAccEnt = fromAccSer.updateBalance(fromAccount,tranAmt, 'C');
 			frmTransaction.setBalance(frmAccEnt.getAcctBalance());
 			
-			toTransactionKey.setTransactionID(1);
+			//toTransactionKey.setTransactionID(1);
 			toTransactionKey.setTranType('D');
 			toTransaction.setAccountId(toAccount);
 			toTransaction.setTranAmount(tranAmt);
 			toTransaction.setTranDate(new Date());
-			toTransaction.setTransactionKey(frmTransactionKey);
+			toTransaction.setTransactionKey(toTransactionKey);
 			toTransaction.setUserID(toAccSer.getAccountDetails(toAccount).getUserID());
 			toTransaction.setTranCreatedByUser(userID);
 			toAccEnt = toAccSer.updateBalance(toAccount,tranAmt, 'D');
@@ -231,12 +231,18 @@ public class TransferService {
 			session.update(frmAccEnt);
 			session.update(toAccEnt);
 		
+			tranConfResult.setFromAccountId(fromAccount);
+			tranConfResult.setToAccountId(toAccount);
+			tranConfResult.setAmount(tranAmt);
+			tranConfResult.setBalance(frmAccEnt.getAcctBalance());
+			this.setTranConfResult(tranConfResult);
 			tx.commit();
 			}
 			catch(Exception e)
 			{
-				if(tx!=null)	tx.rollback();
 				e.printStackTrace();
+				if(tx!=null)	tx.rollback();
+				throw e;
 			}
 			finally {
 				session.close();
