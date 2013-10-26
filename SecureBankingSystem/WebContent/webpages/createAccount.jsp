@@ -28,17 +28,38 @@
 			</div>
 			<div class="span8">
 				<div class="container">
-					<form>
+					<form method="post" action="">
 						<table width="50%">
 							<tr>
-								<td align="right">User ID</td>
-								<td align="left"><input type="text" name="uid" maxlength="10"/></td>
+								<td>User ID</td>
+								<td><input type="text" name="uid"
+									maxlength="10" /></td>
+								<td></td>
 							</tr>
 							<tr>
-								<td><input class="btn btn-success" type="button"
+							<td></td>
+								<td><script type="text/javascript"
+										src="https://www.google.com/recaptcha/api/challenge?k=6Lf_WukSAAAAAJWhqZUyGbV1093UQSQ3tjN2lkMj">
+									
+								</script>
+									<noscript>
+										<iframe
+											src="https://www.google.com/recaptcha/api/noscript?k=6Lf_WukSAAAAAJWhqZUyGbV1093UQSQ3tjN2lkMj"
+											height="300" width="500" frameborder="0"></iframe>
+										<br>
+										<textarea name="recaptcha_challenge_field" rows="3" cols="40">
+   </textarea>
+										<input type="hidden" name="recaptcha_response_field"
+											value="manual_challenge">
+									</noscript></td>
+									<td></td>
+							</tr>
+							<tr>
+								<td><input class="btn btn-success" type="submit"
 									name="submit" value="Submit" /></td>
 								<td><input class="btn" type="reset" name="cancel"
 									value="Cancel" /></td>
+									<td></td>
 							</tr>
 
 						</table>
