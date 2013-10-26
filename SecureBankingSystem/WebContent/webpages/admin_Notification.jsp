@@ -43,14 +43,14 @@
 				<td align="justify">Employee1 | Email id1</td>
 				<td align="justify">Role assignment</td>
 				<td align="justify">Assign Role X to Employee X | Email id X</td>
-				<td align="justify"><button class="btn btn-primary" type="submit">Validate</button></td>
+				<td align="justify"><button class="btn btn-small btn-primary" type="submit">Validate</button></td>
 			</tr>
 			<tr>
 
 				<td align="justify">Employee2 | Email id2</td>
-				<td align="justify">Technicanl account access</td>
+				<td align="justify">Technical account access</td>
 				<td align="justify">Assign Technical Account access for Customer Y  | Email id Y</td>
-				<td align="justify"><button class="btn btn-primary" type="submit">Validate</button></td>
+				<td align="justify"><button class="btn btn-small btn-primary" type="submit">Validate</button></td>
 			</tr>
 		</table>
 	</form>
