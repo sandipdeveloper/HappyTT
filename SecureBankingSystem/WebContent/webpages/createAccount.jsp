@@ -32,7 +32,7 @@
 						<table width="50%">
 							<tr>
 								<td align="right">User ID</td>
-								<td align="left"><input type="text" name="uid" /></td>
+								<td align="left"><input type="text" name="uid" maxlength="10"/></td>
 							</tr>
 							<tr>
 								<td><input class="btn btn-success" type="button"
