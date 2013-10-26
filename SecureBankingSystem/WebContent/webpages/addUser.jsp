@@ -48,11 +48,22 @@
     			</tr>
     			<tr>
       				<td align="right">Department:</td>
-      				<td align="left"><input type="text" name="department" /></td>
+      				<td align="left"><select>
+      					<option value="Sales">Sales</option>
+      					<option value="IT and Technical Support">IT and Technical Support</option>
+      					<option value="Transactions Monitoring">Transactions Monitoring</option>
+      					<option value="Human Resources">Human Resources</option>
+      					<option value="Company Management">Company Management</option>
+      				</select></td>
     			</tr>
     			<tr>
       				<td align="right">Designation:</td>
-      				<td align="left"><input type="text" name="designation" /></td>
+      				<td align="left"><select>
+      					<option value="Corporate Level">Corporate Level</option>
+      					<option value="Department Manager">Department Manager</option>
+      					<option value="Regular Employees">Regular Employees</option>
+      					<option value="System Administrators">System Administrators</option>
+      				</select></td>
     			</tr>
     			<tr>
       				<td align="right">User ID:</td>
