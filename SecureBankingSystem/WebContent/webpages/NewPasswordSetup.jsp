@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -27,14 +28,13 @@
 						</ul>
 					</div>
 					<div class="span9">
-						<form id="form1" name="form1" method="post" action="">
+						<form:form action = "newpasswdfunction.html" method ="post" modelAttribute="userandotp" >
 							<div>
 								<table>
 									<tbody>
 										<tr>
 											<td width="150px"><label> OTP </label></td>
-											<td width="200px"><input width="200px" type="text"
-												name="OTP" id="OTP" /></td>
+											<td width="200px"><form:input path="otpcode" type="text"  /></td>
 										</tr>
 										<tr>
 											<td width="150px"><label> New Password </label></td>
@@ -47,16 +47,14 @@
 												name="confirmpassword" id="confirmpassword" /></td>
 										</tr>
 										<tr>
-											<td><input class="btn btn-primary" name="ChangePW"
-												type="button" id="ChangePW" value="Submit"
-												style="float: right;" /></td>
+											<td><input  class="btn btn-success" type="submit" value="Enter" /></td>
 										</tr>
 									</tbody>
 								</table>
 
 
 							</div>
-						</form>
+						</form:form> 
 					</div>
 				</div>
 			</div>

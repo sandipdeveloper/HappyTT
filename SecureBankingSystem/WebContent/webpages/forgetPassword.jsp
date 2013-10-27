@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -22,49 +23,49 @@
              </ul>
          </div>
       	<div class="span9">
-		<form id="form1" name="form1" method="post" action="">
+		<form:form action = "forgetPassFunction.html" method ="post" commandName="user" >
 		
     	<table>
     	<tbody>
     	<tr>
-    		<td><label> Username </label></td>
-    		<td><label id = "username" name = "username"> Tom </label></td>
+    		<td><label> UserID </label></td>
+    		<td><label id = "username" name = "username"> <%= session.getAttribute("UserID")%> </label></td>
     	</tr>
     	<tr>
     		<td width="150px">
     		<label> Date Of Birth </label>
     		</td>
     		<td width="200px">
-    		<input width = "200px" type="text" name="dateofbirth" id="dateofbirth" />
+    		<form:input path="DOB" type="text" placeholder="MM/DD/YYYY" />
     		</td>
     	</tr>
     	<tr>
-    		<td><label id="seq1" name="seq1"> Secure Question 1?</label></td> 
+    		<td><label id="seq1" name="seq1"> <%= session.getAttribute("SecureQ1")%></label></td> 
     		<td width="200px">
-    		<input width = "200px" type="text" name="answerQ1" id="answerQ1" />
+    		<form:input path="secureA1" type="text"  />
     		</td>
     	</tr>
     	<tr>
-    		<td><label id="seq2" name="seq2"> Secure Question 2?</label></td> 
+    		<td><label id="seq2" name="seq2"> <%= session.getAttribute("SecureQ2")%></label></td> 
     	    <td width="200px">
-    		<input width = "200px" type="text" name="answerQ2" id="answerQ2" />
+    		<form:input path="secureA2" type="text"  />
     		</td>
     	</tr>
     	<tr>
-    		<td><label id="seq3" name="seq3"> Secure Question 3?</label></td> 
+    		<td><label id="seq3" name="seq3"> <%= session.getAttribute("SecureQ3")%></label></td> 
     		<td width="200px">
-    		<input width = "200px" type="text" name="answerQ3" id="answerQ3" />
+    		<form:input path="secureA3" type="text" />
     		</td>
     	</tr>
     	<tr>
     	<td>
-    		<input class="btn btn-primary" name = "Enter" type="button" id = "Enter" value="Enter" style=" float:right;" />
+    		<input  class="btn btn-success" type="submit" value="Enter" style=" float:right;" />
     	</td>
     	</tr>
     	
 </tbody>
 </table>
-</form>
+</form:form>
 </div>
 </div>
 </div>

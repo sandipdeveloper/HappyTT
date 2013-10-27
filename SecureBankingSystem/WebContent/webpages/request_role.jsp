@@ -1,3 +1,7 @@
+<%@page import="com.asu.ss.secure_banking_system.service.RequestRoleService"%>
+<%@page import="com.asu.ss.secure_banking_system.model.UserEntity"%>
+<%@page import="com.asu.ss.secure_banking_system.model.RoleEntity"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -20,17 +24,24 @@
              </ul>
 		</div>
 		<div class="span8">
-		<form>
+		<form action="RequestRole" method="post">
 		<table style="height: 121px; width: 605px;">
 		<tr>
 			<td>Select user :</td>
 			<td>
-			<select style="width: 238px; ">
-			<option value="emailid1">employee1 | emailid1</option>
-  			<option value="emailid2">employee2 | emailid2</option>
-  			<option value="emailid3">employee3 | emailid3</option>
-  			<option value="emailid4">employee4 | emailid4</option>
-			</select>
+			<select style="width: 238px;" onchange="" name="userSelect" id="userSelect">
+			<option>Please select one...</option>
+			<% 
+				RequestRoleService rrsvc = new RequestRoleService();
+				List<UserEntity> users = rrsvc.getAllInternalUsers();
+				for(int i=0;i<users.size(); i++)
+				{
+			%>
+  			<option value=<%= users.get(i).getUserID()%>><%= users.get(i).getUserID()%></option>
+  			<%  
+  				}
+  			%>
+  			</select>
 			
 			</td>
 			<td></td>
@@ -38,18 +49,25 @@
 		<tr>
 			
 			<td>Select role :</td>
-			<td><select style="width: 234px; ">
-			<option value="regular_employee">Regular employee</option>
-  			<option value="manager">Manager</option>
-  			<option value="corporate_official">Corporate official</option>
-  			<option value="system_admin">System Administrator</option></select>
+			<td><select style="width: 234px;" name="roleSelect" id = "roleSelect">
+			<option>Please select one...</option>
+			<%
+				
+				List<RoleEntity> roles = rrsvc.getAllRoles();
+				for(int i=0;i<roles.size(); i++)
+				{
+			%>  			
+				<option value= <%= roles.get(i).getRoleID()%>><%= roles.get(i).getRoleName()%></option></select>
+			<%
+				}
+			%>		
 			</td>
 			<td></td>
 		</tr>
 		<tr>
 			
 			<td></td>
-			<td><button class="btn btn-primary" type="submit" style="width: 118px; " name="Request role" >Request role</button>
+			<td><button class="btn btn-primary" type="submit" style="width: 118px; "name="Request role">Request role</button>
 			</td>
 			<td></td>
 		</tr>
@@ -58,6 +76,5 @@
 </div>
 </div>
 </div>
-
 </body>
 </html>

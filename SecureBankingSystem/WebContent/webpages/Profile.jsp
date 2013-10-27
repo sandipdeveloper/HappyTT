@@ -1,3 +1,5 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page contentType="text/html; charset=utf-8" language="java"
 	import="java.sql.*" errorPage=""%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -24,7 +26,7 @@
 					<div class="span3">
 						<ul class="nav nav-list">
 							<li class="nav-header">Other Links</li>
-							<li>Add Links Here</li>
+							<li><a href="addUser.html">Add User</a></li>
 						</ul>
 					</div>
 					<div class="span9">
@@ -35,69 +37,71 @@
 										<tr>
 											<td><label> UserID</label></td>
 											<td width="200px" style="border-style: dotted;"><label
-												id="userid " name="userid"> qingl</label></td>
+												id="userid " name="userid">  <%= session.getAttribute("UserID")%></label></td>
 										</tr>
 										<tr>
-											<td><label> Username</label></td>
+											<td><label> Firstname</label></td>
 											<td width="200px" style="border-style: dotted;"><label
-												id="username " name="username"> Tom</label></td>
+												id="username " name="username"> <c:out value="${Firstname}" /></label></td>
+										</tr>
+										<tr>
+											<td><label> Lastname</label></td>
+											<td width="200px" style="border-style: dotted;"><label
+												id="username " name="username">  ${Lastname}</label></td>
 										</tr>
 										<tr>
 										<td><label> Email</label></td>
 										
 											<td width="200px" style="border-style: dotted;"><label
-												id="email " name="email"> hahaha@gmail.com</label></td>
+												id="email " name="email">   ${Emailid}</label></td>
 										</tr>
 										<tr>
 											<td><label> Contact</label></td>
 											<td width="200px" style="border-style: dotted;"><label
-												id="contact " name="contact"> 4804332233</label></td>
+												id="contact " name="contact">  ${Contact}</label></td>
 										</tr>
 										<tr>
 											<td width="200px"><label> Address</label></td>
 										
 										
 											<td width="200" style="border-style: dotted;"><label
-												id="username " name="username"> 212121212121
-													fhahahahah hahaha</label></td>
-											<td width="128"><input class="btn btn-primary" name="addresschange"
-												type="button" id="addresschange" value="Change"
-												style="float: right;" /></td>
+												id="username " name="username"> ${Address}</label></td>
+
 										</tr>
 										
 										<tr>
 											<td><label> Date Of Birth</label></td>
 											<td width="200px" style="border-style: dotted;"><label
-												id="dob" name="dob"> 09/09/1969</label></td>
+												id="dob" name="dob">  ${Dob}</label></td>
 										</tr>
 										<tr>
 											<td width="200px"><label id="seq1" name="seq1">
 													Secure Question 1?</label></td>
-													<td width="140px"><input class="btn btn-primary" name="secureQC" type="button"
-												id="secureQC" value="Change" style="float: right;" /></td>
+													<td width="200px" style="border-style: dotted;"><label
+												id="dob" name="dob">  ${SecureQ1}</label></td>
 										</tr>
 										<tr>
 											<td width="200px"><label id="seq2" name="seq2">
 													Secure Question 2?</label></td>
-											<td width="140px"><input class="btn btn-primary" name="secureQC" type="button"
-												id="secureQC" value="Change" style="float: right;" /></td>
+													<td width="200px" style="border-style: dotted;"><label
+												id="dob" name="dob"> ${SecureQ2}</label></td>
 										</tr>
 										<tr>
 											<td width="200px"><label id="seq3" name="seq3">
 													Secure Question 3?</label></td>
-											<td width="140px"><input class="btn btn-primary" name="secureQC" type="button"
-												id="secureQC" value="Change" style="float: right;" /></td>
-										</tr>
-										<tr>
-											<td width="200px"><label> Want to change your
-													password?</label></td>
-											<td width="140px"><input class="btn btn-primary" name="pwchange" type="button"
-												id="pwchange" value="Yes" style="float: right;" /></td>
+													<td width="200px" style="border-style: dotted;"><label
+												id="dob" name="dob"> ${SecureQ3}</label></td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
 						</form>
+						<form:form action = "changecontactPage.html" method ="post" commandName="user" >
+							<td><input  class="btn btn-success" type="submit" value="Change Contact" /></td>
+						</form:form>
+						<form:form action = "changesecureQAPage.html" method ="post" commandName="user" >
+							<td><input  class="btn btn-success" type="submit" value="Change SecureQuestions" /></td>
+						</form:form>
 					</div>
 				</div>
 			</div>

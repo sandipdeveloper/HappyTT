@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -23,7 +24,7 @@
          <div class="span8">
 			<div id ="mainFrame">
 			<div id="content">
-			<form id="form1" name="form1" method="post" action="">
+			<form:form action = "changesecurityQA.html" method ="post" commandName="user" >
 			<div style =" width : 350px;">
     		<table>
     		<tbody>
@@ -78,7 +79,7 @@
     </table> 
      </div>
      
-</form>
+</form:form> 
 </div>
 </div>
 </div>
