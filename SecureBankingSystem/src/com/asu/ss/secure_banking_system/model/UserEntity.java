@@ -3,8 +3,14 @@ package com.asu.ss.secure_banking_system.model;
 import java.util.ArrayList;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="USER")
 public class UserEntity {
 
 @Id
@@ -34,21 +40,20 @@ public ArrayList<AccountEntity> getAccounts() {
 public void setAccounts(ArrayList<AccountEntity> accounts) {
 	this.accounts = accounts;
 }
-/**
- * @return the roles
- */
-public ArrayList<RoleEntity> getRoles() {
-	return roles;
-}
-/**
- * @param roles the roles to set
- */
-public void setRoles(ArrayList<RoleEntity> roles) {
-	this.roles = roles;
-}
+
 
 private ArrayList<AccountEntity> accounts;
-private ArrayList<RoleEntity> roles;
+
+@ManyToOne
+@JoinColumn(name="role_id")
+private RoleEntity role;
+
+public RoleEntity getRole() {
+	return role;
+}
+public void setRole(RoleEntity role) {
+	this.role = role;
+}
 
 
 }

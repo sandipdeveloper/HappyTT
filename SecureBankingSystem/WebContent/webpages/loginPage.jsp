@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -23,7 +24,7 @@
              </ul>
          </div>
       	<div class="span9">
-			<form id="form1" name="form1" method="post" action="">
+			<form:form action = "loginFunction.html" method ="post" commandName="user" >
 			<div style =" width : 300px;">
     		<table>
     		<tbody>
@@ -32,7 +33,7 @@
     			<label> Username </label>
     			</td>
     			<td width ="200px">
-    			<label id = "username" name = "username"> Tom </label>	
+    			<label id = "username" name = "username">  <%= session.getAttribute("UserID")%> </label>	
     			</td>
     		</tr>
     		<tr>
@@ -40,17 +41,20 @@
     			<label> Password </label>
     			</td>
     			<td width="200px">
-    			<input width = "200px" type="text" name="Username" id="Username" />
+    			<form:input path="userID" type="text"  />
     			</td>
     		</tr>
     		<tr>
-    		<td><input class="btn btn-primary" name = "Enter" type="button" id = "Enter" value="Enter" style=" float:right;" /></td>
+    		<td><input  class="btn btn-success" type="submit" value="login" /></td>
     		</tr>
     		</tbody>
     		</table>   
     
     </div>
-</form>
+</form:form>
+<form:form action = "forgetPasswordPage.html" method ="post" commandName="user" >
+	<input  class="btn btn-success" type="submit" value="Forget Password" />
+</form:form>
 </div>
 </div>
 </div>

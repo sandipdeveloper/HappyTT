@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <html>
@@ -14,9 +15,9 @@
 	<div class="navbar">
   		<div class="navbar-inner">
       	<ul class="nav nav-tabs">
-      	<li><a href="addUser.jsp">Add User</a></li>
+      	<li><a href="addUser.html">Add User</a></li>
       	<li class="active"><a href="#">Delete User</a></li>
-      	<li><a href="transferUser.html">Transfer User</a></li>
+      	<li><a href="transferUserPage.html">Transfer User</a></li>
     	</ul>
   		</div>
 	</div>
@@ -29,26 +30,18 @@
          </div>
          <div class="span8">
           <div class="container">
-			<form>
+			<form:form action = "deleteUser.html" method ="post" commandName="user" >
                <table>
     			<tr>
-      				<td align="right">First Name:</td>
-      				<td align="left"><input type="text" name="first"  /></td>
-    			</tr>
-    			<tr>
-      				<td align="right">Last Name:</td>
-      				<td align="left"><input type="text" name="last" /></td>
-    			</tr>
-    			<tr>
     				<td align="right">User ID:</td>
-    				<td align="left"><input type="text" name="id" /></td>
+    				<td align="left"><form:input path="userID" type="text"/></td>
     			</tr>
     			<tr>
-    				<td align="justify"><button class="btn btn-danger" type="button" name="delete" value="submit">Delete</button></td>
-    				<td align="justify"><button class="btn" type="button" name="cancel">Cancel</button></td>
+    				<td align="justify"><input  class="btn btn-success" type="submit" value="delete" /></td>
+    				<td align="justify"><input  class="btn" type="submit" value="Cancel"/></td>
     			</tr>
     		</table>	
-    		</form> 
+    		</form:form> 
 		</div>
      </div>
      </div>

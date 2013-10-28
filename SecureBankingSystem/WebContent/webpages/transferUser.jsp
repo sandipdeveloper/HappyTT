@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <html>
@@ -14,9 +15,9 @@
 	<div class="navbar">
   		<div class="navbar-inner">
       	<ul class="nav nav-tabs">
-      	<li><a href="addUser.jsp">Add User</a></li>
-      	<li><a href="deleteUser.jsp">Delete User</a></li>
-      	<li class="active"><a href="transferUser.jsp">Transfer User</a></li>
+      	<li><a href="addUser.html">Add User</a></li>
+      	<li><a href="deleteUserPage.html">Delete User</a></li>
+      	<li class="active"><a href="#">Transfer User</a></li>
     	</ul>
   		</div>
 	</div>
@@ -29,31 +30,28 @@
          </div>
          <div class="span8">
           <div class="container">
-			<form>
+			<form:form action = "transferuser.html" method ="post" commandName="user" >
                <table>
-    			<tr>
-      				<td align="right">First Name:</td>
-      				<td align="left"><input type="text" name="first"  /></td>
-    			</tr>
-    			<tr>
-      				<td align="right">Last Name:</td>
-      				<td align="left"><input type="text" name="last" /></td>
-    			</tr>
+               <tr>
+               <td>
+               <%= session.getAttribute("UserID")%> 
+               </td>
+               </tr>
     			<tr>
     				<td align="right">User ID:</td>
-    				<td align="left"><input type="text" name="id" /></td>
+    				<td align="left"><form:input path="userID" type="text"/></td>
     			</tr>
     			<tr>
     				<td align="right">Destination Department:</td>
-    				<td align="left"><input type="text" name="department" /></td>
+    				<td align="left"><form:input path="deptID" type="text"/></td>
     			</tr>
     			<tr>
     			
-    				<td align="justify"><button class="btn btn-primary" type="button" name="transfer" value="submit">Transfer</button></td>
-    				<td align="justify"><button class="btn" type="button" name="cancel">Cancel</button></td>
+    				<td align="justify"><input  class="btn btn-success" type="submit" value="transfer"></td>
+    				<td align="justify"><input  class="btn" type="reset" value="Cancel"></td>
     			</tr>
     		</table>	
-    		</form> 
+    		</form:form>  
 		</div>
      </div>
      </div>

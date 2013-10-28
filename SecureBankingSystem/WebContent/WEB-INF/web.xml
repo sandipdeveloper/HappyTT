@@ -2,8 +2,19 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>SecureBankingSystem</display-name>
   <welcome-file-list>
-    <welcome-file>/webpages/Debit.jsp</welcome-file>
+    <welcome-file>/webpages/addUser.jsp</welcome-file>
   </welcome-file-list>
+   <servlet>
+        <servlet-name>spring</servlet-name>
+        <servlet-class>
+			org.springframework.web.servlet.DispatcherServlet
+		</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>spring</servlet-name>
+        <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
   <servlet>
     <servlet-name>DebitAndCreditServlet</servlet-name>
     <servlet-class>com.asu.ss.secure_banking_system.servlet.DebitAndCreditServlet</servlet-class>
@@ -11,6 +22,46 @@
   <servlet-mapping>
     <servlet-name>DebitAndCreditServlet</servlet-name>
     <url-pattern>/Debit.jsp</url-pattern>
+  </servlet-mapping>
+ <servlet>
+    <servlet-name>TAARequestValidation</servlet-name>
+    <servlet-class>com.asu.ss.secure_banking_system.servlet.TAARequestValidation</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TAARequestValidation</servlet-name>
+    <url-pattern>/webpages/TAARequestValidation</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>TAARequest</servlet-name>
+    <servlet-class>com.asu.ss.secure_banking_system.servlet.TAARequest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TAARequest</servlet-name>
+    <url-pattern>/webpages/TAARequest</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RequestRole</servlet-name>
+    <servlet-class>com.asu.ss.secure_banking_system.servlet.RequestRole</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RequestRole</servlet-name>
+    <url-pattern>/webpages/RequestRole</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AssignRole</servlet-name>
+    <servlet-class>com.asu.ss.secure_banking_system.servlet.AssignRole</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AssignRole</servlet-name>
+    <url-pattern>/webpages/AssignRole</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RoleRequestValidation</servlet-name>
+    <servlet-class>com.asu.ss.secure_banking_system.servlet.RoleRequestValidation</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RoleRequestValidation</servlet-name>
+    <url-pattern>/webpages/RoleRequestValidation</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>TransferServlet</servlet-name>

@@ -40,14 +40,12 @@
 			<td></td>
 		</tr>
 		<tr>
-
 			<td></td>
 			<td><button class="btn btn-primary" type="submit" style="width: 118px;"	name="Assign">Assign</button></td>
 			<td><button class="btn btn-danger" type="submit" style="width: 118px;" name="Reject">Reject</button></td>
 			<td></td>
 		</tr>
 		<tr>
-
 			<td></td>
 			<td></td>
 			<td></td>
